@@ -1,0 +1,19 @@
+package in.h.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import in.h.service.UserService;
+
+@Controller
+public class PatientController {
+	@Autowired
+	UserService service;
+	
+	public String openPatientpage() {
+		
+		 return "patient";
+		
+	}
+
+}

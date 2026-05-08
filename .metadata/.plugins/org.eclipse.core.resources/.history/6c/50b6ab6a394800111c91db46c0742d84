@@ -1,0 +1,151 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Management</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f7fb;
+        }
+
+        /* Header */
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        /* Container */
+        .container {
+            padding: 20px;
+        }
+
+        /* Form */
+        .form-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .btn {
+            background: #1abc9c;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #16a085;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .edit {
+            background: #3498db;
+        }
+
+        .delete {
+            background: #e74c3c;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    🏥 Patient Management
+</div>
+
+<div class="container">
+
+    <!-- Add Patient Form -->
+    <div class="form-box">
+        <h3>Add Patient</h3>
+		<% if(request.getAttribute("sucess") != null){ %>
+		       <p style="color: green; font-weight: bold;">
+		           <%= request.getAttribute("sucess") %>
+		       </p>
+		   <% } %>
+
+
+        <form action="/savePatient" method="post">
+            <input type="text" name="name" placeholder="Enter Name" required>
+            <input type="number" name="age" placeholder="Enter Age" required>
+			<input type="text" name="gender" placeholder="Enter Gender" required>
+            <input type="text" name="disease" placeholder="Enter Disease" required>
+
+            <button type="submit" class="btn">Save Patient</button>
+        </form>
+    </div>
+
+    <!-- Patient List -->
+    <h3>Patient List</h3>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Disease</th>
+            <th>Action</th>
+        </tr>
+
+        <!-- Example static data (baad me dynamic karenge) -->
+        <tr>
+            <td>1</td>
+            <td>Rahul</td>
+            <td>25</td>
+            <td>Fever</td>
+            <td>
+                <a href="#" class="action-btn edit">Edit</a>
+                <a href="#" class="action-btn delete">Delete</a>
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+</body>
+</html>

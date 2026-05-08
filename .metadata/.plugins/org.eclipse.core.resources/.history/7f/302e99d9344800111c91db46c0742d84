@@ -1,0 +1,29 @@
+package in.h.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import in.h.entity.Patient;
+import in.h.service.UserService;
+
+@Controller
+public class PatientController {
+	@Autowired
+	UserService service;
+	
+	
+	@GetMapping("/patients")
+	public String openPatientpage(Model model) {
+		  model.addAttribute("patient", new Patient());
+		 return "patient";
+		
+	}
+	
+	public String savePatient() {
+		
+		
+	}
+
+}

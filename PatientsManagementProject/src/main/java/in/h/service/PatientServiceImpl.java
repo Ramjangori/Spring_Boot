@@ -1,0 +1,48 @@
+package in.h.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import in.h.entity.Patient;
+import in.h.repository.PatientRepo;
+
+@Service
+public class PatientServiceImpl implements PatientService {
+	@Autowired
+	PatientRepo repo;
+
+	@Override
+	public boolean savePatient(Patient patient) {
+		try {
+
+			repo.save(patient);
+			return true;
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
+	@Override
+	public List getAllPatients() {
+		  
+		return repo.findAll();
+	}
+
+	@Override
+	public boolean deletePatient(long id) {
+		 repo.deleteById(id);
+		return false;
+	}
+
+	@Override
+	public Patient getPatientById(long id) {
+	    return repo.findById(id).orElse(null);
+	}
+}

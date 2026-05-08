@@ -1,0 +1,18 @@
+package com.app.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.app.Reposotory.UserRepo;
+import com.app.entity.User;
+
+public class UserServiceImpl implements UserService {
+	@Autowired
+	UserRepo repo;
+
+	@Override
+	public String register(User user) {
+		
+		return null;
+	}
+
+}

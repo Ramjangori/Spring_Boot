@@ -1,0 +1,11 @@
+package in.h.service;
+
+public class UserServiceImpl implements UserService {
+
+	@Override
+	public boolean registerUser() {
+		
+		return false;
+	}
+
+}

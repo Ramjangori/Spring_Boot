@@ -1,0 +1,33 @@
+package in.h.tests;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import in.h.entity.Patient;
+import in.h.repository.PatientRepo;
+
+@Component
+public class TestPatient implements CommandLineRunner {
+	
+	@Autowired
+	PatientRepo p;
+
+	@Override
+	public void run(String... args) throws Exception {
+		
+//		Patient p1 = new Patient();
+//		p1.setName("Ramjan Gori");
+//		p1.setDob(LocalDate.of(2002,11,9));
+//		p1.setEmail("ramjangori@gmail.com");
+//		p1.setGender("Male");
+//		
+//		p.save(p1);
+		List<Patient> p1 = p.findAll();
+		
+	}
+
+}

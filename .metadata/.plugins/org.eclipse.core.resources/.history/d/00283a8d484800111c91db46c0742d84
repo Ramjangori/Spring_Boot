@@ -1,0 +1,120 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>Edit Patient</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #e3f2fd, #ffffff);
+        }
+
+        .container {
+            width: 420px;
+            margin: 60px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 9px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #007bff;
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: #555;
+        }
+
+        .back a:hover {
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Edit Patient Details</h2>
+      
+	<% if(request.getAttribute("error") != null) { %>
+	    <p style="color:red; text-align:center;">
+	        <%= request.getAttribute("error") %>
+	    </p>
+	<% } %>
+	<% if(request.getAttribute("success") != null) { %>
+	<script>
+	    alert("Patient Updated Successfully!");
+	</script>
+	<% } %>
+	<form action="/updatePatient" method="post">
+
+	    <!-- Hidden ID -->
+	    <input type="hidden" name="pid" value="${patient.pid}" />
+
+	    Name:
+	    <input type="text" name="name" value="${patient.name}" /><br><br>
+
+	    Age:
+	    <input type="number" name="age" value="${patient.age}" /><br><br>
+
+	    Gender:
+		<input type="text" name="age" value="${patient.gender}" /><br><br>
+
+	    Disease:
+	    <input type="text" name="disease" value="${patient.disease}" /><br><br>
+
+	    <button type="submit">Update</button>
+
+	</form>
+
+    <div class="back">
+        <a href="/patients">⬅ Back to Patient List</a>
+    </div>
+</div>
+
+</body>
+</html>

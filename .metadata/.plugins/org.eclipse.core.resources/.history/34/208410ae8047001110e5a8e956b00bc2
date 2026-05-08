@@ -1,0 +1,7 @@
+package in.h.repository;
+
+import in.h.entity.Patient;
+
+public interface PatientRepo  extends JpaRepository<Patient , Long>{
+
+}

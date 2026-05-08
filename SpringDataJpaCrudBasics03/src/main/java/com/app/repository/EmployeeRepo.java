@@ -1,0 +1,9 @@
+package com.app.repository;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.app.prasoon.entity.Employees;
+
+public interface EmployeeRepo extends CrudRepository<Employees,Integer>{
+
+}

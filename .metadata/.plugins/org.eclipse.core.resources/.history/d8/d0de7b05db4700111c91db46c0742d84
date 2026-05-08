@@ -1,0 +1,35 @@
+package in.h.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import in.h.entity.User;
+import in.h.repository.UserRepo;
+
+@Service
+public class UserServiceImpl implements UserService {
+	@Autowired
+	 public UserRepo userrepo;
+
+	@Override
+	public boolean registerUser(User user) {
+
+		try {
+
+			userrepo.save(user);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	@Override
+	public User loginUser(String email, String pass) {
+		   User validUser = userrepo
+	}
+
+	
+
+}
