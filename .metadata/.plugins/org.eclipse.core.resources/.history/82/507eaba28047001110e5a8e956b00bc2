@@ -1,7 +1,0 @@
-package in.h.repository;
-
-import in.h.entity.Patient;
-
-public class PatientRepo  extends JpaRepository<Patient , Long>{
-
-}

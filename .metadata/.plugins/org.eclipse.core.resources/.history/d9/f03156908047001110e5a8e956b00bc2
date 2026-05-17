@@ -1,7 +1,0 @@
-package in.h.repository;
-
-import org.springframework.data.jpa.repository.config.JpaRepositoryConfigExtension;
-
-public class PatientRepo  extends JpaRepository<Patient , Long>{
-
-}

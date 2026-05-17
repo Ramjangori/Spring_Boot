@@ -1,9 +1,0 @@
-package in.h.service;
-
-import in.h.entity.Patient;
-
-public interface PatientService {
-	
-	public boolean savePatient(Patient patient);
-
-}
