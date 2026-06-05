@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexaBank — Create Account</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<style>
+
+:root {
+  --navy:   #0a1628;
+  --blue:   #1a56db;
+  --accent: #3b82f6;
+  --gold:   #f5c842;
+  --teal:   #06b6d4;
+  --green:  #10b981;
+  --card:   #182236;
+  --border: rgba(255,255,255,0.07);
+  --text:   #e2e8f0;
+  --muted:  #8a9ab5;
+  --glow:   rgba(59,130,246,0.3);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% -10%, rgba(26,86,219,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 100%, rgba(6,182,212,0.12) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* Topbar */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,22,40,0.85);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem; height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand-icon {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: #fff; box-shadow: 0 0 18px var(--glow);
+}
+.brand-name { font-size: 1.2rem; font-weight: 700; color: #fff; }
+.brand-name span { color: var(--gold); }
+.back-btn {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--muted); text-decoration: none; font-size: 0.85rem;
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 7px 14px; transition: all 0.2s; background: var(--card);
+}
+.back-btn:hover { color: #fff; border-color: var(--accent); }
+
+/* Page */
+.page {
+  position: relative; z-index: 1;
+  max-width: 480px; margin: 0 auto;
+  padding: 40px 24px;
+  animation: fadeUp 0.6s ease both;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
+/* Card */
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px; overflow: hidden;
+}
+
+.card-top {
+  background: linear-gradient(120deg, #0f2040 0%, #1a3a6e 50%, #0a2240 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 26px 28px;
+  position: relative; overflow: hidden;
+}
+.card-top::before {
+  content: '';
+  position: absolute; right: -30px; top: -30px;
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.card-top-icon {
+  width: 46px; height: 46px; border-radius: 13px;
+  background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; color: var(--accent);
+  margin-bottom: 12px; position: relative; z-index: 1;
+}
+.card-top h2 { font-size: 1.2rem; font-weight: 700; color: #fff; position: relative; z-index: 1; }
+.card-top p  { font-size: 0.8rem; color: var(--muted); margin-top: 3px; position: relative; z-index: 1; }
+
+.card-body { padding: 26px 28px; display: flex; flex-direction: column; gap: 18px; }
+
+/* Fields */
+.field label {
+  display: block; font-size: 0.72rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted); margin-bottom: 7px;
+}
+.input-wrap { position: relative; }
+.input-wrap i {
+  position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+  color: var(--muted); pointer-events: none;
+}
+.field input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px 12px 38px;
+  color: var(--text); font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem; outline: none; transition: border-color 0.2s;
+}
+.field input::placeholder { color: var(--muted); }
+.field input:focus { border-color: var(--accent); background: rgba(59,130,246,0.06); }
+
+/* Button */
+.create-btn {
+  width: 100%; border: none; border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue), var(--accent));
+  color: #fff; font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 600; padding: 13px;
+  cursor: pointer; display: flex; align-items: center;
+  justify-content: center; gap: 8px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.create-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* Result */
+#result {
+  border-radius: 10px; padding: 13px 16px;
+  font-size: 0.88rem; display: none;
+  align-items: center; gap: 8px;
+}
+#result.success {
+  background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25);
+  color: var(--green); display: flex;
+}
+#result.error {
+  background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.25);
+  color: #f87171; display: flex;
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="brand" href="index.html">
+    <div class="brand-icon"><i class="bi bi-bank2"></i></div>
+    <span class="brand-name">Nexa<span>Bank</span></span>
+  </a>
+  <a href="index.html" class="back-btn">
+      <i class="bi bi-arrow-left"></i> Back to Home
+  </a>
+</nav>
+
+<div class="page">
+  <div class="form-card">
+
+    <div class="card-top">
+      <div class="card-top-icon"><i class="bi bi-person-plus-fill"></i></div>
+      <h2>Create Bank Account</h2>
+      <p>Fill in the details to open your new account</p>
+    </div>
+
+    <div class="card-body">
+
+      <div class="field">
+        <label>Holder Name</label>
+        <div class="input-wrap">
+          <i class="bi bi-person"></i>
+          <input type="text" id="holderName" placeholder="Enter Holder Name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Initial Balance</label>
+        <div class="input-wrap">
+          <i class="bi bi-currency-rupee"></i>
+          <input type="number" id="balance" placeholder="Enter Balance">
+        </div>
+      </div>
+
+      <button class="create-btn" onclick="createAccount()">
+        <i class="bi bi-person-plus-fill"></i> Create Account
+      </button>
+
+      <div id="result"></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function createAccount() {
+  fetch("http://localhost:9090/accounts/create", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      holderName: document.getElementById("holderName").value,
+      balance:    document.getElementById("balance").value
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    localStorage.setItem("holderName",     data.holderName);
+    localStorage.setItem("accountNumber",  data.accountNumber);
+
+    const el = document.getElementById("result");
+    el.className = "success";
+    el.innerHTML = `<i class="bi bi-check-circle-fill"></i> Account Created Successfully : ${data.accountNumber} — Redirecting...`;
+
+    setTimeout(() => { window.location.href = "dashboard.html"; }, 2000);
+  })
+  .catch(error => {
+    const el = document.getElementById("result");
+    el.className = "error";
+    el.innerHTML = `<i class="bi bi-x-circle-fill"></i> Failed To Create Account`;
+    console.log(error);
+  });
+}
+</script>
+
+</body>
+</html>

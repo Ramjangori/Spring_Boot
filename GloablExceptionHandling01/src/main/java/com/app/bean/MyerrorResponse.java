@@ -1,0 +1,16 @@
+package com.app.bean;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class MyerrorResponse {
+
+	private String date;
+	private String status;
+	private int code;
+	private String massage;
+}
