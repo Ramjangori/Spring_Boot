@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f4f4f4;
+}
+
+.register-container{
+    width:350px;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.15);
+}
+
+.register-container h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.input-group input:focus{
+    outline:none;
+    border-color:#28a745;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#28a745;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#218838;
+}
+
+.login-link{
+    text-align:center;
+    margin-top:15px;
+}
+
+.message{
+    text-align:center;
+    margin-top:10px;
+    color:green;
+}
+
+.error{
+    color:red;
+}
+
+</style>
+</head>
+<body>
+
+<div class="register-container">
+
+    <h2>Create Account</h2>
+
+    <form id="registerForm">
+
+        <div class="input-group">
+            <input type="text" id="username"
+                   placeholder="Enter Username" required>
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="password"
+                   placeholder="Enter Password" required>
+        </div>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <p id="message" class="message"></p>
+
+    <div class="login-link">
+        Already have an account?
+        <a href="/login.html">Login</a>
+    </div>
+
+</div>
+
+<script>
+
+document.getElementById("registerForm")
+.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const user = {
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value
+    };
+
+    try{
+
+        const response = await fetch("/register",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(user)
+        });
+
+        if(response.ok){
+
+            document.getElementById("message")
+                    .innerText = "Registration Successful! Redirecting...";
+
+            setTimeout(()=>{
+                window.location.href="/login.html";
+            },1500);
+
+        }else{
+
+            document.getElementById("message")
+                    .innerText = "Registration Failed";
+
+            document.getElementById("message")
+                    .classList.add("error");
+        }
+
+    }catch(err){
+
+        document.getElementById("message")
+                .innerText = "Something went wrong";
+
+        document.getElementById("message")
+                .classList.add("error");
+    }
+
+});
+
+</script>
+
+</body>
+</html>
