@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<title>
+		Home page
+	</title>
+</head>
+
+<body>
+	<h2>Course Details</h2>
+
+	<table border="1">
+		<tr>
+
+			<th>Name</th>
+			<th>Duration</th>
+			<th>Course Fees</th>
+			<th>Edit Course</th>
+			<th>Delete Course</th>
+		</tr>
+
+		<tr th:each="c : ${course}">
+			<td th:text="${c.name}"></td>
+			<td th:text="${c.duration}"></td>
+			<td th:text="${c.fees}"></td>
+			<td>			<a th:href="@{/editCourse(id=${c.id})}">
+							Edit Course
+						</a></td>
+			<td> <a th:href="@{/deleteCourse(id=${c.id})}">
+					Delete Course
+				</a></td>
+		</tr>
+</body>
+
+</html>

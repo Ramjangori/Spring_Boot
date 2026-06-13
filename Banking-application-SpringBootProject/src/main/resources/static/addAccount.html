@@ -168,6 +168,17 @@
 				<input type="text" id="accountNumber" class="form-control" placeholder="Enter Account Number">
 
 			</div>
+			<label class="form-label">
+							Password
+						</label>
+
+						<div class="input-wrap">
+
+							<i class="bi bi-lock-fill"></i>
+
+							<input type="text" id="password" class="form-control" placeholder="Enter Password">
+
+						</div>
 
 			<button class="btn-continue" onclick="addAccount()">
 
@@ -185,56 +196,64 @@
 
 		function addAccount() {
 
-			let accountNumber =
-				document.getElementById("accountNumber").value;
+		    let accountNumber =
+		        document.getElementById("accountNumber").value;
 
-			fetch(
-				"http://localhost:9090/accounts/" +
-				accountNumber
-			)
+		    let password =
+		        document.getElementById("password").value;
 
-				.then(res => {
+		    fetch(
+		        "http://localhost:9090/accounts/login?accountNumber="
+		        + accountNumber +
+		        "&password=" +
+		        password,
+		        {
+		            method: "POST"
+		        }
+		    )
 
-					if (!res.ok) {
-						throw new Error("Account Not Found");
-					}
+		    .then(res => {
 
-					return res.json();
+		        if (!res.ok) {
+		            throw new Error("Invalid Credentials");
+		        }
 
-				})
+		        return res.json();
 
-				.then(data => {
+		    })
 
-					localStorage.setItem(
-						"holderName",
-						data.holderName
-					);
+		    .then(data => {
 
-					localStorage.setItem(
-						"accountNumber",
-						data.accountNumber
-					);
+		        localStorage.setItem(
+		            "holderName",
+		            data.holderName
+		        );
 
-					document.getElementById("result")
-						.innerHTML =
-						"Account Added Successfully...";
+		        localStorage.setItem(
+		            "accountNumber",
+		            data.accountNumber
+		        );
 
-					setTimeout(() => {
+		        document.getElementById("result")
+		            .innerHTML =
+		            "Account Added Successfully...";
 
-						window.location.href =
-							"dashboard.html";
+		        setTimeout(() => {
 
-					}, 1500);
+		            window.location.href =
+		                "dashboard.html";
 
-				})
+		        }, 1500);
 
-				.catch(error => {
+		    })
 
-					document.getElementById("result")
-						.innerHTML =
-						"Invalid Account Number";
+		    .catch(error => {
 
-				});
+		        document.getElementById("result")
+		            .innerHTML =
+		            "Invalid Account Number Or Password";
+
+		    });
 
 		}
 

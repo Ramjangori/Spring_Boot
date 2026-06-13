@@ -57,19 +57,23 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	@Transactional
 	public String transferMoney(TransferRequest request) {
-		
+		 
+		 if(request.getAmount()<0) {
+			 
+			 return "Enter Amount Greater Than 0";
+		 }
 		 
 		  Optional<Account> sender = accountRepo.findByAccountNumber(request.getFromAccount());
 		  Optional<Account> reciever = accountRepo.findByAccountNumber(request.getToAccount());
 		  Double amount = request.getAmount();
 		  if(sender.isPresent() && reciever.isPresent()) {
-			  Account sac = sender.get();
-			  Account rac = reciever.get();
-			  if(sac.getBalance()>=amount) {
-				  sac.setBalance(sac.getBalance()-amount);
-				  rac.setBalance(rac.getBalance()+amount);  
-				  accountRepo.save(sac);
-				  accountRepo.save(rac);
+			  Account senderaccount = sender.get();
+			  Account recieveraccount = reciever.get();
+			  if(senderaccount.getBalance()>=amount) {
+				  senderaccount.setBalance(senderaccount.getBalance()-amount);
+				  recieveraccount.setBalance(recieveraccount.getBalance()+amount);  
+				  accountRepo.save(senderaccount);
+				  accountRepo.save(recieveraccount);
 				  
 				  Transaction t = new Transaction();
 				  t.setAmount(request.getAmount());

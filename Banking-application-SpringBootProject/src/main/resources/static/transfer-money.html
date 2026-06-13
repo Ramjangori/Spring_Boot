@@ -239,33 +239,45 @@ body::before {
 </div>
 
 <script>
-function transferMoney() {
-  const fromAccount = localStorage.getItem("accountNumber");
-  fetch("http://localhost:9090/accounts/transfer", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      fromAccount: fromAccount,
-      toAccount:   document.getElementById("toAccount").value,
-      amount:      document.getElementById("amount").value
-    })
-  })
-  .then(res => res.text())
-  .then(data => {
-    const el = document.getElementById("result");
-    el.className = "success";
-    el.innerHTML = `<i class="bi bi-check-circle-fill"></i> ${data}`;
-	
-	setTimeout(() => {
-	        window.location.href = "dashboard.html";
-	    }, 2000); // 2 second baad redirect
-  })
-  .catch(() => {
-    const el = document.getElementById("result");
-    el.className = "error";
-    el.innerHTML = `<i class="bi bi-x-circle-fill"></i> Transfer failed. Please try again.`;
-  });
-}
+	function transferMoney() {
+	  const fromAccount = localStorage.getItem("accountNumber");
+
+	  fetch("http://localhost:9090/accounts/transfer", {
+	    method: "POST",
+	    headers: {
+	      "Content-Type": "application/json"
+	    },
+	    body: JSON.stringify({
+	      fromAccount: fromAccount,
+	      toAccount: document.getElementById("toAccount").value,
+	      amount: document.getElementById("amount").value
+	    })
+	  })
+	  .then(async res => {
+
+	    const data = await res.text();
+
+	    if (!res.ok) {
+	      throw new Error(data);
+	    }
+
+	    return data;
+	  })
+	  .then(data => {
+	    const el = document.getElementById("result");
+	    el.className = "success";
+	    el.innerHTML = `<i class="bi bi-check-circle-fill"></i> ${data}`;
+
+	    setTimeout(() => {
+	      window.location.href = "dashboard.html";
+	    }, 2000);
+	  })
+	  .catch(err => {
+	    const el = document.getElementById("result");
+	    el.className = "error";
+	    el.innerHTML = `<i class="bi bi-x-circle-fill"></i> ${err.message}`;
+	  });
+	}
 </script>
 
 </body>

@@ -1,7 +1,7 @@
 package com.app;
 
 import java.util.Arrays;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -25,16 +25,19 @@ public class UserTest implements CommandLineRunner {
         User s4 = new User(4, "Aman Raja", "Java");
         User s5 = new User(5, "prasoon Sir", "Java Full Stack");
 
-        Iterable<User> users =
+        Iterable<User> users1 =
                 repo.saveAll(Arrays.asList(s1, s2, s3, s4, s5));
+//
+//        Optional<User> op = repo.findById((long) 1);
+//
+//        if (op.isPresent()) {
+//            User user = op.get();
+//            System.out.println(user);
+//        } else {
+//            System.out.println("User not found");
+//        }
 
-        Optional<User> op = repo.findById((long) 1);
-
-        if (op.isPresent()) {
-            User user = op.get();
-            System.out.println(user);
-        } else {
-            System.out.println("User not found");
-        }
+        
+        
     }
 }
